@@ -1,5 +1,6 @@
 package com.dota2.metatracker;
 
+import com.dota2.metatracker.model.CounterData;
 import com.dota2.metatracker.model.Hero;
 import com.dota2.metatracker.model.HeroStatsDto;
 import com.dota2.metatracker.service.GraphQlClient;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class MetaTrackerController {
@@ -24,13 +27,20 @@ public class MetaTrackerController {
         this.graphQlClient = graphQlClient;
     }
 
-    @GetMapping("/meta-tracker/hero")
-    public String findHeroWithHighestCounteredRating(@RequestParam String name) throws IOException {
+    @GetMapping(value = "/counter-advantage/hero")
+    public List<CounterData> findHeroWithHighestCounteredRating(@RequestParam Hero hero) throws IOException {
         ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
-        HeroStatsDto heroStatsDto = graphQlClient.getHeroStats(Hero.findByName(name).getId());
+        HeroStatsDto heroStatsDto = graphQlClient.getHeroStats(hero.getId());
         logger.info(ow.writeValueAsString(heroStatsDto));
-        Hero heroWithHighestCounteredRating = Hero.findById(heroStatsDto.getData().getHeroStats().getMatchUp().get(0).getVs().get(0).getHeroId2());
-        return heroWithHighestCounteredRating.getName();
+        return heroStatsDto.getData().getHeroStats().getMatchUp().get(0).getVs().stream()
+                .map(this::mapToCounterData)
+                .collect(Collectors.toList());
+    }
+
+    private CounterData mapToCounterData(HeroStatsDto.Data.HeroStats.MatchUp.Vs heroMatchUp) {
+        String counteredHeroName = Hero.findById(heroMatchUp.getHeroId2()).getName();
+        double winrateAdvantage = heroMatchUp.getSynergy();
+        return new CounterData(counteredHeroName, winrateAdvantage);
     }
 
 }
