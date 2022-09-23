@@ -2,7 +2,7 @@ package com.dota2.metatracker.service;
 
 import com.dota2.metatracker.configuration.MetaTrackerConfigProperties;
 import com.dota2.metatracker.model.GraphqlRequestBody;
-import com.dota2.metatracker.model.HeroStatsDto;
+import com.dota2.metatracker.model.graphql.HeroStatsDto;
 import com.dota2.metatracker.util.GraphqlSchemaReaderUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

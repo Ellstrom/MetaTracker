@@ -1,18 +1,15 @@
 query ($heroId1: Short!, $take: Int, $matchLimit: Int) {
   heroStats {
-    matchUp(heroId: $heroId1, take: $take, matchLimit: $matchLimit) {
-      vs {
-        heroId1
-        heroId2
-        count
-        synergy
-        winRateHeroId1
-      }
-      with {
-        heroId1
-        heroId2
-        synergy
-        count
+    heroVsHeroMatchup(heroId: $heroId1, take: $take, matchLimit: $matchLimit) {
+      advantage {
+        vs {
+          heroId2
+          synergy
+        }
+        with {
+          heroId2
+          synergy
+        }
       }
     }
   }

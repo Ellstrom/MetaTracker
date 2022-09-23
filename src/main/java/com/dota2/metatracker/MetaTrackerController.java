@@ -2,7 +2,8 @@ package com.dota2.metatracker;
 
 import com.dota2.metatracker.model.CounterData;
 import com.dota2.metatracker.model.Hero;
-import com.dota2.metatracker.model.HeroStatsDto;
+import com.dota2.metatracker.model.graphql.HeroStatsDto;
+import com.dota2.metatracker.model.graphql.Vs;
 import com.dota2.metatracker.service.GraphQlClient;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
@@ -27,17 +28,30 @@ public class MetaTrackerController {
         this.graphQlClient = graphQlClient;
     }
 
-    @GetMapping(value = "/counter-advantage/hero")
-    public List<CounterData> findHeroWithHighestCounteredRating(@RequestParam Hero hero) throws IOException {
+/* - TODO
+    @GetMapping(value = "/matchups-vs/hero")
+    public List<CounterData> findHeroMatchupsVsHero(@RequestParam Hero hero) throws IOException {
         ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
         HeroStatsDto heroStatsDto = graphQlClient.getHeroStats(hero.getId());
         logger.info(ow.writeValueAsString(heroStatsDto));
-        return heroStatsDto.getData().getHeroStats().getMatchUp().get(0).getVs().stream()
+        return heroStatsDto.getData().getHeroStats().getHeroVsHeroMatchup().getAdvantage().get(0).getVs().stream()
                 .map(this::mapToCounterData)
                 .collect(Collectors.toList());
     }
 
-    private CounterData mapToCounterData(HeroStatsDto.Data.HeroStats.MatchUp.Vs heroMatchUp) {
+ */
+
+    @GetMapping(value = "/matchups-as/hero")
+    public List<CounterData> findHeroMatchupsAsHero(@RequestParam Hero hero) throws IOException {
+        ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+        HeroStatsDto heroStatsDto = graphQlClient.getHeroStats(hero.getId());
+        logger.info(ow.writeValueAsString(heroStatsDto));
+        return heroStatsDto.getData().getHeroStats().getHeroVsHeroMatchup().getAdvantage().get(0).getVs().stream()
+                .map(this::mapToCounterData)
+                .collect(Collectors.toList());
+    }
+
+    private CounterData mapToCounterData(Vs heroMatchUp) {
         String counteredHeroName = Hero.findById(heroMatchUp.getHeroId2()).getName();
         double winrateAdvantage = heroMatchUp.getSynergy();
         return new CounterData(counteredHeroName, winrateAdvantage);
