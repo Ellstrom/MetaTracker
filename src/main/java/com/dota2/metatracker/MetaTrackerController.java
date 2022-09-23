@@ -34,7 +34,7 @@ public class MetaTrackerController {
         ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
         HeroStatsDto heroStatsDto = graphQlClient.getHeroStats(hero.getId());
         logger.info(ow.writeValueAsString(heroStatsDto));
-        return heroStatsDto.getData().getHeroStats().getHeroVsHeroMatchup().getAdvantage().get(0).getVs().stream()
+        return heroStatsDto.getData().getHeroStats().getHeroVsHeroMatchup1().getAdvantage().get(0).getVs().stream()
                 .map(this::mapToCounterData)
                 .collect(Collectors.toList());
     }
@@ -46,7 +46,7 @@ public class MetaTrackerController {
         ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
         HeroStatsDto heroStatsDto = graphQlClient.getHeroStats(hero.getId());
         logger.info(ow.writeValueAsString(heroStatsDto));
-        return heroStatsDto.getData().getHeroStats().getHeroVsHeroMatchup().getAdvantage().get(0).getVs().stream()
+        return heroStatsDto.getData().getHeroStats().getHeroVsHeroMatchup1().getAdvantage().get(0).getVs().stream()
                 .map(this::mapToCounterData)
                 .collect(Collectors.toList());
     }

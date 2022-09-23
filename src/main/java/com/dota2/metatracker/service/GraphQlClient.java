@@ -35,7 +35,6 @@ public class GraphQlClient {
         graphqlRequestBody.setQuery(query);
 
         graphqlRequestBody.setVariables(Map.of(
-                "heroId1", heroId1,
                 "take", NUMBER_OF_RESULTS,
                 "matchLimit", MINIMUM_AMOUNT_OF_GAMES));
 
