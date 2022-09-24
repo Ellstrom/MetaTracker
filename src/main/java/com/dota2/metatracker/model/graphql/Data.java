@@ -8,4 +8,8 @@ public class Data {
         return heroStats;
     }
 
+    public void setHeroStats(HeroStats heroStats) {
+        this.heroStats = heroStats;
+    }
+
 }

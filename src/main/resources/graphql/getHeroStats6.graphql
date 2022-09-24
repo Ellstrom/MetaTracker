@@ -1,0 +1,43 @@
+query ($take: Int, $matchLimit: Int) {
+  heroStats {
+    heroVsHeroMatchup135: heroVsHeroMatchup(heroId: 135, take: $take, matchLimit: $matchLimit) {
+      advantage {
+      	heroId
+        vs {
+          heroId2
+          synergy
+        }
+        with {
+          heroId2
+          synergy
+        }
+      }
+    }
+    heroVsHeroMatchup136: heroVsHeroMatchup(heroId: 136, take: $take, matchLimit: $matchLimit) {
+      advantage {
+      	heroId
+        vs {
+          heroId2
+          synergy
+        }
+        with {
+          heroId2
+          synergy
+        }
+      }
+    }
+    heroVsHeroMatchup137: heroVsHeroMatchup(heroId: 137, take: $take, matchLimit: $matchLimit) {
+      advantage {
+      	heroId
+        vs {
+          heroId2
+          synergy
+        }
+        with {
+          heroId2
+          synergy
+        }
+      }
+    }
+  }
+}

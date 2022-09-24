@@ -1,7 +1,8 @@
 query ($take: Int, $matchLimit: Int) {
   heroStats {
-    heroVsHeroMatchup1: heroVsHeroMatchup(heroId: 1, take: $take, matchLimit: $matchLimit) {
+    heroVsHeroMatchup74: heroVsHeroMatchup(heroId: 74, take: $take, matchLimit: $matchLimit) {
       advantage {
+      	heroId
         vs {
           heroId2
           synergy
@@ -12,8 +13,9 @@ query ($take: Int, $matchLimit: Int) {
         }
       }
     }
-    heroVsHeroMatchup2: heroVsHeroMatchup(heroId: 2, take: $take, matchLimit: $matchLimit) {
+    heroVsHeroMatchup75: heroVsHeroMatchup(heroId: 75, take: $take, matchLimit: $matchLimit) {
       advantage {
+      	heroId
         vs {
           heroId2
           synergy
@@ -24,8 +26,9 @@ query ($take: Int, $matchLimit: Int) {
         }
       }
     }
-    heroVsHeroMatchup3: heroVsHeroMatchup(heroId: 3, take: $take, matchLimit: $matchLimit) {
+    heroVsHeroMatchup76: heroVsHeroMatchup(heroId: 76, take: $take, matchLimit: $matchLimit) {
       advantage {
+      	heroId
         vs {
           heroId2
           synergy
@@ -36,8 +39,9 @@ query ($take: Int, $matchLimit: Int) {
         }
       }
     }
-    heroVsHeroMatchup4: heroVsHeroMatchup(heroId: 4, take: $take, matchLimit: $matchLimit) {
+    heroVsHeroMatchup77: heroVsHeroMatchup(heroId: 77, take: $take, matchLimit: $matchLimit) {
       advantage {
+      	heroId
         vs {
           heroId2
           synergy
@@ -48,8 +52,9 @@ query ($take: Int, $matchLimit: Int) {
         }
       }
     }
-    heroVsHeroMatchup5: heroVsHeroMatchup(heroId: 5, take: $take, matchLimit: $matchLimit) {
+    heroVsHeroMatchup78: heroVsHeroMatchup(heroId: 78, take: $take, matchLimit: $matchLimit) {
       advantage {
+      	heroId
         vs {
           heroId2
           synergy
@@ -60,8 +65,9 @@ query ($take: Int, $matchLimit: Int) {
         }
       }
     }
-    heroVsHeroMatchup6: heroVsHeroMatchup(heroId: 6, take: $take, matchLimit: $matchLimit) {
+    heroVsHeroMatchup79: heroVsHeroMatchup(heroId: 79, take: $take, matchLimit: $matchLimit) {
       advantage {
+      	heroId
         vs {
           heroId2
           synergy
@@ -72,8 +78,9 @@ query ($take: Int, $matchLimit: Int) {
         }
       }
     }
-    heroVsHeroMatchup7: heroVsHeroMatchup(heroId: 7, take: $take, matchLimit: $matchLimit) {
+    heroVsHeroMatchup80: heroVsHeroMatchup(heroId: 80, take: $take, matchLimit: $matchLimit) {
       advantage {
+      	heroId
         vs {
           heroId2
           synergy
@@ -84,8 +91,9 @@ query ($take: Int, $matchLimit: Int) {
         }
       }
     }
-    heroVsHeroMatchup8: heroVsHeroMatchup(heroId: 8, take: $take, matchLimit: $matchLimit) {
+    heroVsHeroMatchup81: heroVsHeroMatchup(heroId: 81, take: $take, matchLimit: $matchLimit) {
       advantage {
+      	heroId
         vs {
           heroId2
           synergy
@@ -96,8 +104,9 @@ query ($take: Int, $matchLimit: Int) {
         }
       }
     }
-    heroVsHeroMatchup9: heroVsHeroMatchup(heroId: 9, take: $take, matchLimit: $matchLimit) {
+    heroVsHeroMatchup82: heroVsHeroMatchup(heroId: 82, take: $take, matchLimit: $matchLimit) {
       advantage {
+      	heroId
         vs {
           heroId2
           synergy
@@ -108,8 +117,9 @@ query ($take: Int, $matchLimit: Int) {
         }
       }
     }
-    heroVsHeroMatchup10: heroVsHeroMatchup(heroId: 10, take: $take, matchLimit: $matchLimit) {
+    heroVsHeroMatchup83: heroVsHeroMatchup(heroId: 83, take: $take, matchLimit: $matchLimit) {
       advantage {
+      	heroId
         vs {
           heroId2
           synergy
@@ -120,8 +130,9 @@ query ($take: Int, $matchLimit: Int) {
         }
       }
     }
-    heroVsHeroMatchup11: heroVsHeroMatchup(heroId: 11, take: $take, matchLimit: $matchLimit) {
+    heroVsHeroMatchup84: heroVsHeroMatchup(heroId: 84, take: $take, matchLimit: $matchLimit) {
       advantage {
+      	heroId
         vs {
           heroId2
           synergy
@@ -132,8 +143,9 @@ query ($take: Int, $matchLimit: Int) {
         }
       }
     }
-    heroVsHeroMatchup12: heroVsHeroMatchup(heroId: 12, take: $take, matchLimit: $matchLimit) {
+    heroVsHeroMatchup85: heroVsHeroMatchup(heroId: 85, take: $take, matchLimit: $matchLimit) {
       advantage {
+      	heroId
         vs {
           heroId2
           synergy
@@ -144,8 +156,9 @@ query ($take: Int, $matchLimit: Int) {
         }
       }
     }
-    heroVsHeroMatchup13: heroVsHeroMatchup(heroId: 13, take: $take, matchLimit: $matchLimit) {
+    heroVsHeroMatchup86: heroVsHeroMatchup(heroId: 86, take: $take, matchLimit: $matchLimit) {
       advantage {
+      	heroId
         vs {
           heroId2
           synergy
@@ -156,8 +169,9 @@ query ($take: Int, $matchLimit: Int) {
         }
       }
     }
-    heroVsHeroMatchup14: heroVsHeroMatchup(heroId: 14, take: $take, matchLimit: $matchLimit) {
+    heroVsHeroMatchup87: heroVsHeroMatchup(heroId: 87, take: $take, matchLimit: $matchLimit) {
       advantage {
+      	heroId
         vs {
           heroId2
           synergy
@@ -168,8 +182,9 @@ query ($take: Int, $matchLimit: Int) {
         }
       }
     }
-    heroVsHeroMatchup15: heroVsHeroMatchup(heroId: 15, take: $take, matchLimit: $matchLimit) {
+    heroVsHeroMatchup88: heroVsHeroMatchup(heroId: 88, take: $take, matchLimit: $matchLimit) {
       advantage {
+      	heroId
         vs {
           heroId2
           synergy
@@ -180,8 +195,9 @@ query ($take: Int, $matchLimit: Int) {
         }
       }
     }
-    heroVsHeroMatchup16: heroVsHeroMatchup(heroId: 16, take: $take, matchLimit: $matchLimit) {
+    heroVsHeroMatchup89: heroVsHeroMatchup(heroId: 89, take: $take, matchLimit: $matchLimit) {
       advantage {
+      	heroId
         vs {
           heroId2
           synergy
@@ -192,8 +208,9 @@ query ($take: Int, $matchLimit: Int) {
         }
       }
     }
-    heroVsHeroMatchup17: heroVsHeroMatchup(heroId: 17, take: $take, matchLimit: $matchLimit) {
+    heroVsHeroMatchup90: heroVsHeroMatchup(heroId: 90, take: $take, matchLimit: $matchLimit) {
       advantage {
+      	heroId
         vs {
           heroId2
           synergy
@@ -204,8 +221,9 @@ query ($take: Int, $matchLimit: Int) {
         }
       }
     }
-    heroVsHeroMatchup18: heroVsHeroMatchup(heroId: 18, take: $take, matchLimit: $matchLimit) {
+    heroVsHeroMatchup91: heroVsHeroMatchup(heroId: 91, take: $take, matchLimit: $matchLimit) {
       advantage {
+      	heroId
         vs {
           heroId2
           synergy
@@ -216,8 +234,9 @@ query ($take: Int, $matchLimit: Int) {
         }
       }
     }
-    heroVsHeroMatchup19: heroVsHeroMatchup(heroId: 19, take: $take, matchLimit: $matchLimit) {
+    heroVsHeroMatchup92: heroVsHeroMatchup(heroId: 92, take: $take, matchLimit: $matchLimit) {
       advantage {
+      	heroId
         vs {
           heroId2
           synergy
@@ -228,8 +247,9 @@ query ($take: Int, $matchLimit: Int) {
         }
       }
     }
-    heroVsHeroMatchup20: heroVsHeroMatchup(heroId: 20, take: $take, matchLimit: $matchLimit) {
+    heroVsHeroMatchup93: heroVsHeroMatchup(heroId: 93, take: $take, matchLimit: $matchLimit) {
       advantage {
+      	heroId
         vs {
           heroId2
           synergy
@@ -240,8 +260,9 @@ query ($take: Int, $matchLimit: Int) {
         }
       }
     }
-    heroVsHeroMatchup21: heroVsHeroMatchup(heroId: 21, take: $take, matchLimit: $matchLimit) {
+    heroVsHeroMatchup94: heroVsHeroMatchup(heroId: 94, take: $take, matchLimit: $matchLimit) {
       advantage {
+      	heroId
         vs {
           heroId2
           synergy
@@ -252,8 +273,35 @@ query ($take: Int, $matchLimit: Int) {
         }
       }
     }
-    heroVsHeroMatchup22: heroVsHeroMatchup(heroId: 22, take: $take, matchLimit: $matchLimit) {
+    heroVsHeroMatchup95: heroVsHeroMatchup(heroId: 95, take: $take, matchLimit: $matchLimit) {
       advantage {
+      	heroId
+        vs {
+          heroId2
+          synergy
+        }
+        with {
+          heroId2
+          synergy
+        }
+      }
+    }
+    heroVsHeroMatchup96: heroVsHeroMatchup(heroId: 96, take: $take, matchLimit: $matchLimit) {
+      advantage {
+      	heroId
+        vs {
+          heroId2
+          synergy
+        }
+        with {
+          heroId2
+          synergy
+        }
+      }
+    }
+    heroVsHeroMatchup97: heroVsHeroMatchup(heroId: 97, take: $take, matchLimit: $matchLimit) {
+      advantage {
+      	heroId
         vs {
           heroId2
           synergy
