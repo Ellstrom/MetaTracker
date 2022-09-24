@@ -15,6 +15,11 @@ public class CounterData {
         this.matchCount = matchCount;
     }
 
+    public CounterData(String heroName, double winrateAdvantage) {
+        this.heroName = heroName;
+        this.winrateAdvantage = winrateAdvantage;
+    }
+
     public String getHeroName() {
         return heroName;
     }

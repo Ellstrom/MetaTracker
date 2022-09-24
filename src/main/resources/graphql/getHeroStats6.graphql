@@ -8,7 +8,7 @@ query ($take: Int, $matchLimit: Int) {
           synergy
           matchCount
         }
-        vs {
+        with {
           heroId2
           synergy
           matchCount
@@ -23,7 +23,7 @@ query ($take: Int, $matchLimit: Int) {
           synergy
           matchCount
         }
-        vs {
+        with {
           heroId2
           synergy
           matchCount
@@ -38,7 +38,7 @@ query ($take: Int, $matchLimit: Int) {
           synergy
           matchCount
         }
-        vs {
+        with {
           heroId2
           synergy
           matchCount

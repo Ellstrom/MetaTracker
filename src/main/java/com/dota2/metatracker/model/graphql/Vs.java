@@ -18,4 +18,15 @@ public class Vs {
         return matchCount;
     }
 
+    public void setHeroId2(short heroId2) {
+        this.heroId2 = heroId2;
+    }
+
+    public void setSynergy(double synergy) {
+        this.synergy = synergy;
+    }
+
+    public void setMatchCount(long matchCount) {
+        this.matchCount = matchCount;
+    }
 }
