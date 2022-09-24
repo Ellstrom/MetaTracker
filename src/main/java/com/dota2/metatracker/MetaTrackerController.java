@@ -25,26 +25,26 @@ public class MetaTrackerController {
     }
 
     @GetMapping(value = "/matchups-vs/hero")
-    public List<CounterData> findHeroMatchupsVsHero(@RequestParam Hero hero) throws IOException {
-        HeroStatsDto heroStatsDto = graphQlClient.getHeroStats();
+    public List<CounterData> findHeroMatchupsVsHero(@RequestParam Hero hero,
+                                                    @RequestParam(defaultValue = "0") int minimumAmountOfGamesForMatchup) throws IOException {
+        HeroStatsDto heroStatsDto = graphQlClient.getHeroStats(minimumAmountOfGamesForMatchup);
 
         return heroStatsDto.getData().getHeroStats().getHeroVsHeroMatchups().stream()
                 .flatMap(heroVsHeroMatchup -> heroVsHeroMatchup.getAdvantage().stream())
                 .map((Advantage advantage) -> mapToCounterData(advantage, hero.getId()))
                 .sorted(Comparator.comparingDouble(CounterData::getWinrateAdvantage).reversed())
                 .collect(Collectors.toList());
-
     }
 
     private CounterData mapToCounterData(Advantage advantage, short vsHeroId) {
         String heroName = Hero.findById(advantage.getHeroId()).getName();
-        double winrateAdvantage = advantage.getVs().stream()
+
+        Vs matchup = advantage.getVs().stream()
                 .filter(vs -> vsHeroId == vs.getHeroId2())
                 .findFirst()
-                .orElseGet(Vs::new)
-                .getSynergy();
+                .orElseGet(Vs::new);
 
-        return new CounterData(heroName, winrateAdvantage);
+        return new CounterData(heroName, matchup.getSynergy(), matchup.getMatchCount());
     }
 
 }

@@ -6,10 +6,12 @@ query ($take: Int, $matchLimit: Int) {
         vs {
           heroId2
           synergy
+          matchCount
         }
         with {
           heroId2
           synergy
+          matchCount
         }
       }
     }
@@ -19,10 +21,12 @@ query ($take: Int, $matchLimit: Int) {
         vs {
           heroId2
           synergy
+          matchCount
         }
         with {
           heroId2
           synergy
+          matchCount
         }
       }
     }
@@ -32,10 +36,12 @@ query ($take: Int, $matchLimit: Int) {
         vs {
           heroId2
           synergy
+          matchCount
         }
         with {
           heroId2
           synergy
+          matchCount
         }
       }
     }
@@ -45,10 +51,12 @@ query ($take: Int, $matchLimit: Int) {
         vs {
           heroId2
           synergy
+          matchCount
         }
         with {
           heroId2
           synergy
+          matchCount
         }
       }
     }
@@ -58,10 +66,12 @@ query ($take: Int, $matchLimit: Int) {
         vs {
           heroId2
           synergy
+          matchCount
         }
         with {
           heroId2
           synergy
+          matchCount
         }
       }
     }
@@ -71,10 +81,12 @@ query ($take: Int, $matchLimit: Int) {
         vs {
           heroId2
           synergy
+          matchCount
         }
         with {
           heroId2
           synergy
+          matchCount
         }
       }
     }
@@ -84,10 +96,12 @@ query ($take: Int, $matchLimit: Int) {
         vs {
           heroId2
           synergy
+          matchCount
         }
         with {
           heroId2
           synergy
+          matchCount
         }
       }
     }
@@ -97,10 +111,12 @@ query ($take: Int, $matchLimit: Int) {
         vs {
           heroId2
           synergy
+          matchCount
         }
         with {
           heroId2
           synergy
+          matchCount
         }
       }
     }
@@ -110,10 +126,12 @@ query ($take: Int, $matchLimit: Int) {
         vs {
           heroId2
           synergy
+          matchCount
         }
         with {
           heroId2
           synergy
+          matchCount
         }
       }
     }
@@ -123,10 +141,12 @@ query ($take: Int, $matchLimit: Int) {
         vs {
           heroId2
           synergy
+          matchCount
         }
         with {
           heroId2
           synergy
+          matchCount
         }
       }
     }
@@ -136,10 +156,12 @@ query ($take: Int, $matchLimit: Int) {
         vs {
           heroId2
           synergy
+          matchCount
         }
         with {
           heroId2
           synergy
+          matchCount
         }
       }
     }
@@ -149,10 +171,12 @@ query ($take: Int, $matchLimit: Int) {
         vs {
           heroId2
           synergy
+          matchCount
         }
         with {
           heroId2
           synergy
+          matchCount
         }
       }
     }
@@ -162,10 +186,12 @@ query ($take: Int, $matchLimit: Int) {
         vs {
           heroId2
           synergy
+          matchCount
         }
         with {
           heroId2
           synergy
+          matchCount
         }
       }
     }
@@ -175,10 +201,12 @@ query ($take: Int, $matchLimit: Int) {
         vs {
           heroId2
           synergy
+          matchCount
         }
         with {
           heroId2
           synergy
+          matchCount
         }
       }
     }
@@ -188,10 +216,12 @@ query ($take: Int, $matchLimit: Int) {
         vs {
           heroId2
           synergy
+          matchCount
         }
         with {
           heroId2
           synergy
+          matchCount
         }
       }
     }
@@ -201,10 +231,12 @@ query ($take: Int, $matchLimit: Int) {
         vs {
           heroId2
           synergy
+          matchCount
         }
         with {
           heroId2
           synergy
+          matchCount
         }
       }
     }
@@ -214,10 +246,12 @@ query ($take: Int, $matchLimit: Int) {
         vs {
           heroId2
           synergy
+          matchCount
         }
         with {
           heroId2
           synergy
+          matchCount
         }
       }
     }
@@ -227,10 +261,12 @@ query ($take: Int, $matchLimit: Int) {
         vs {
           heroId2
           synergy
+          matchCount
         }
         with {
           heroId2
           synergy
+          matchCount
         }
       }
     }
@@ -240,10 +276,12 @@ query ($take: Int, $matchLimit: Int) {
         vs {
           heroId2
           synergy
+          matchCount
         }
         with {
           heroId2
           synergy
+          matchCount
         }
       }
     }
@@ -253,10 +291,12 @@ query ($take: Int, $matchLimit: Int) {
         vs {
           heroId2
           synergy
+          matchCount
         }
         with {
           heroId2
           synergy
+          matchCount
         }
       }
     }
@@ -266,10 +306,12 @@ query ($take: Int, $matchLimit: Int) {
         vs {
           heroId2
           synergy
+          matchCount
         }
         with {
           heroId2
           synergy
+          matchCount
         }
       }
     }
@@ -279,10 +321,12 @@ query ($take: Int, $matchLimit: Int) {
         vs {
           heroId2
           synergy
+          matchCount
         }
         with {
           heroId2
           synergy
+          matchCount
         }
       }
     }
@@ -292,10 +336,12 @@ query ($take: Int, $matchLimit: Int) {
         vs {
           heroId2
           synergy
+          matchCount
         }
         with {
           heroId2
           synergy
+          matchCount
         }
       }
     }
@@ -305,10 +351,12 @@ query ($take: Int, $matchLimit: Int) {
         vs {
           heroId2
           synergy
+          matchCount
         }
         with {
           heroId2
           synergy
+          matchCount
         }
       }
     }

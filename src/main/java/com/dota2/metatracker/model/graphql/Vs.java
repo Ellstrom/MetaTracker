@@ -4,6 +4,7 @@ public class Vs {
 
     private short heroId2;
     private double synergy;
+    private long matchCount;
 
     public short getHeroId2() {
         return heroId2;
@@ -11,6 +12,10 @@ public class Vs {
 
     public double getSynergy() {
         return synergy;
+    }
+
+    public long getMatchCount() {
+        return matchCount;
     }
 
 }

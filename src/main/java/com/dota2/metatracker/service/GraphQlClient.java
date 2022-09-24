@@ -21,31 +21,29 @@ import java.util.Objects;
 public class GraphQlClient {
 
     private final String url;
-    private static final int NUMBER_OF_RESULTS = 1000;
-    private static final int MINIMUM_AMOUNT_OF_GAMES = 0;
-
+    private static final int NUMBER_OF_RESULTS = 100000;
     private final MetaTrackerConfigProperties config;
+    private final WebClient webClient;
 
-    public GraphQlClient(@Value("https://api.stratz.com/graphql") String url, MetaTrackerConfigProperties config) {
+    public GraphQlClient(@Value("https://api.stratz.com/graphql") String url, MetaTrackerConfigProperties config, WebClient webClient) {
         this.url = url;
         this.config = config;
+        this.webClient = webClient;
     }
 
-    public HeroStatsDto getHeroStats() throws IOException {
+    public HeroStatsDto getHeroStats(int minimumAmountOfGamesForMatchup) throws IOException {
 
-        WebClient webClient = WebClient.builder().build();
-
-        HeroStatsDto heroStats1 = performRequest(webClient, generateGraphqlRequestBody("1"));
-        HeroStatsDto heroStats2 = performRequest(webClient, generateGraphqlRequestBody("2"));
-        HeroStatsDto heroStats3 = performRequest(webClient, generateGraphqlRequestBody("3"));
-        HeroStatsDto heroStats4 = performRequest(webClient, generateGraphqlRequestBody("4"));
-        HeroStatsDto heroStats5 = performRequest(webClient, generateGraphqlRequestBody("5"));
-        HeroStatsDto heroStats6 = performRequest(webClient, generateGraphqlRequestBody("6"));
+        HeroStatsDto heroStats1 = performRequest(generateGraphqlRequestBody("1", minimumAmountOfGamesForMatchup));
+        HeroStatsDto heroStats2 = performRequest(generateGraphqlRequestBody("2", minimumAmountOfGamesForMatchup));
+        HeroStatsDto heroStats3 = performRequest(generateGraphqlRequestBody("3", minimumAmountOfGamesForMatchup));
+        HeroStatsDto heroStats4 = performRequest(generateGraphqlRequestBody("4", minimumAmountOfGamesForMatchup));
+        HeroStatsDto heroStats5 = performRequest(generateGraphqlRequestBody("5", minimumAmountOfGamesForMatchup));
+        HeroStatsDto heroStats6 = performRequest(generateGraphqlRequestBody("6", minimumAmountOfGamesForMatchup));
 
         return mergeHeroStats(heroStats1, heroStats2, heroStats3, heroStats4, heroStats5, heroStats6);
     }
 
-    private GraphqlRequestBody generateGraphqlRequestBody(String fileSuffix) throws IOException {
+    private GraphqlRequestBody generateGraphqlRequestBody(String fileSuffix, int minimumAmountOfGamesForMatchup) throws IOException {
         GraphqlRequestBody graphqlRequestBody = new GraphqlRequestBody();
 
         final String query = GraphqlSchemaReaderUtil.getSchemaFromFileName("getHeroStats" + fileSuffix);
@@ -54,12 +52,12 @@ public class GraphQlClient {
 
         graphqlRequestBody.setVariables(Map.of(
                 "take", NUMBER_OF_RESULTS,
-                "matchLimit", MINIMUM_AMOUNT_OF_GAMES));
+                "matchLimit", minimumAmountOfGamesForMatchup));
 
         return graphqlRequestBody;
     }
 
-    private HeroStatsDto performRequest(WebClient webClient, GraphqlRequestBody graphqlRequestBody) {
+    private HeroStatsDto performRequest(GraphqlRequestBody graphqlRequestBody) {
         return webClient.post()
                 .uri(url + "?jwt=" + config.jwtToken())
                 .bodyValue(graphqlRequestBody)

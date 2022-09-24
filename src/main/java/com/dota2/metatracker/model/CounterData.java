@@ -4,13 +4,15 @@ public class CounterData {
 
     private String heroName;
     private double winrateAdvantage;
+    private long matchCount;
 
     public CounterData() {
     }
 
-    public CounterData(String heroName, double winrateAdvantage) {
+    public CounterData(String heroName, double winrateAdvantage, long matchCount) {
         this.heroName = heroName;
         this.winrateAdvantage = winrateAdvantage;
+        this.matchCount = matchCount;
     }
 
     public String getHeroName() {
@@ -29,4 +31,11 @@ public class CounterData {
         this.winrateAdvantage = winrateAdvantage;
     }
 
+    public long getMatchCount() {
+        return matchCount;
+    }
+
+    public void setMatchCount(long matchCount) {
+        this.matchCount = matchCount;
+    }
 }
