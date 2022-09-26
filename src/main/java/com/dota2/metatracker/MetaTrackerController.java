@@ -134,7 +134,12 @@ public class MetaTrackerController {
                     double synergy = vsMatchup.getSynergy();
                     double updatedSynergy = synergy + newSynergy;
                     vsMatchup.setSynergy(updatedSynergy);
-                    vsMatchup.setMatchCount(Math.min(newMatchup.get().getMatchCount(), vsMatchup.getMatchCount()));
+
+                    if (newMatchup.get().getMatchCount() != 0 && vsMatchup.getMatchCount() != 0) {
+                        vsMatchup.setMatchCount(Math.min(newMatchup.get().getMatchCount(), vsMatchup.getMatchCount()));
+                    } else if (newMatchup.get().getMatchCount() != 0) {
+                        vsMatchup.setMatchCount(newMatchup.get().getMatchCount());
+                    }
                 }
             }
         }
@@ -157,11 +162,14 @@ public class MetaTrackerController {
                     double updatedSynergy = synergy + newSynergy;
                     withMatchup.setSynergy(updatedSynergy);
 
-                    if (newMatchup.get().getMatchCount() < withMatchup.getMatchCount()) {
+                    if (newMatchup.get().getMatchCount() != 0 && withMatchup.getMatchCount() != 0) {
+                        withMatchup.setMatchCount(Math.min(newMatchup.get().getMatchCount(), withMatchup.getMatchCount()));
+                    } else if (newMatchup.get().getMatchCount() != 0) {
                         withMatchup.setMatchCount(newMatchup.get().getMatchCount());
                     }
                 }
             }
+
         }
 
         double withAndVsSynergy;
@@ -177,7 +185,16 @@ public class MetaTrackerController {
             lowestMatchupCount = vsMatchup.getMatchCount();
         } else {
             withAndVsSynergy = vsMatchup.getSynergy() + withMatchup.getSynergy();
-            lowestMatchupCount = Math.min(vsMatchup.getMatchCount(), withMatchup.getMatchCount());
+
+            if (vsMatchup.getMatchCount() != 0 && withMatchup.getMatchCount() != 0) {
+                lowestMatchupCount = Math.min(vsMatchup.getMatchCount(), withMatchup.getMatchCount());
+            } else if (vsMatchup.getMatchCount() != 0) {
+                lowestMatchupCount = vsMatchup.getMatchCount();
+            } else if (withMatchup.getMatchCount() != 0) {
+                lowestMatchupCount = withMatchup.getMatchCount();
+            } else {
+                lowestMatchupCount = 0;
+            }
         }
 
         return new CounterData(heroName, withAndVsSynergy, lowestMatchupCount);
