@@ -39,18 +39,6 @@ public class MetaTrackerController {
                 .collect(Collectors.toList());
     }
 
-    @GetMapping(value = "/matchups/vs/heroes")
-    public List<CounterData> findHeroMatchupsVsHeroes(@RequestParam List<Hero> heroes,
-                                                    @RequestParam(defaultValue = "0") int minimumAmountOfGamesForMatchup) throws IOException {
-        HeroStatsDto heroStatsDto = graphQlClient.getHeroStats(minimumAmountOfGamesForMatchup);
-
-        return heroStatsDto.getData().getHeroStats().getHeroVsHeroMatchups().stream()
-                .flatMap(heroVsHeroMatchup -> heroVsHeroMatchup.getAdvantage().stream())
-                .map((Advantage advantage) -> mapToCounterData(advantage, heroes))
-                .sorted(Comparator.comparingDouble(CounterData::getWinrateAdvantage).reversed())
-                .collect(Collectors.toList());
-    }
-
     @GetMapping(value = "/matchups/vs-and-with/heroes")
     public List<CounterData> findHeroMatchupsWithAndVsHeroes(@RequestParam(required = false) List<Hero> vsHeroes,
                                                              @RequestParam(required = false) List<Hero> withHeroes,
