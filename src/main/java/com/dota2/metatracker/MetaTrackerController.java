@@ -136,12 +136,12 @@ public class MetaTrackerController {
         for (Hero hero: withHeroes) {
             if (withMatchup == null) {
                 withMatchup = advantage.getWith().stream()
-                        .filter(vs -> hero.getId() == vs.getHeroId2())
+                        .filter(with -> hero.getId() == with.getHeroId2())
                         .findFirst()
                         .orElseGet(With::new);
             } else {
                 Optional<With> newMatchup = advantage.getWith().stream()
-                        .filter(vs -> hero.getId() == vs.getHeroId2())
+                        .filter(with -> hero.getId() == with.getHeroId2())
                         .findFirst();
 
                 if (newMatchup.isPresent()) {
