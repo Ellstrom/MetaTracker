@@ -27,72 +27,19 @@ public class MetaTrackerController {
         this.graphQlClient = graphQlClient;
     }
 
-    @GetMapping(value = "/matchups/vs/hero")
-    public List<CounterData> findHeroMatchupsVsHero(@RequestParam Hero hero,
-                                                    @RequestParam(defaultValue = "0") int minimumAmountOfGamesForMatchup) throws IOException {
-        HeroStatsDto heroStatsDto = graphQlClient.getHeroStats(minimumAmountOfGamesForMatchup);
-
-        return heroStatsDto.getData().getHeroStats().getHeroVsHeroMatchups().stream()
-                .flatMap(heroVsHeroMatchup -> heroVsHeroMatchup.getAdvantage().stream())
-                .map((Advantage advantage) -> mapToCounterData(advantage, hero.getId()))
-                .sorted(Comparator.comparingDouble(CounterData::getWinrateAdvantage).reversed())
-                .collect(Collectors.toList());
-    }
-
     @GetMapping(value = "/matchups/vs-and-with/heroes")
     public List<CounterData> findHeroMatchupsWithAndVsHeroes(@RequestParam(required = false) List<Hero> vsHeroes,
                                                              @RequestParam(required = false) List<Hero> withHeroes,
+                                                             @RequestParam(required = false) List<Hero> heroesToInclude,
                                                              @RequestParam(defaultValue = "0") int minimumAmountOfGamesForMatchup) throws IOException {
         HeroStatsDto heroStatsDto = graphQlClient.getHeroStats(minimumAmountOfGamesForMatchup);
 
         return heroStatsDto.getData().getHeroStats().getHeroVsHeroMatchups().stream()
                 .flatMap(heroVsHeroMatchup -> heroVsHeroMatchup.getAdvantage().stream())
+                .filter(advantage -> heroesToInclude.contains(Hero.findById(advantage.getHeroId())))
                 .map((Advantage advantage) -> mapToCounterData(advantage, vsHeroes, withHeroes))
                 .sorted(Comparator.comparingDouble(CounterData::getWinrateAdvantage).reversed())
                 .collect(Collectors.toList());
-    }
-
-    private CounterData mapToCounterData(Advantage advantage, short vsHeroId) {
-        String heroName = Hero.findById(advantage.getHeroId()).getName();
-
-        Vs matchup = advantage.getVs().stream()
-                .filter(vs -> vsHeroId == vs.getHeroId2())
-                .findFirst()
-                .orElseGet(Vs::new);
-
-        return new CounterData(heroName, matchup.getSynergy(), matchup.getMatchCount());
-    }
-
-    private CounterData mapToCounterData(Advantage advantage, List<Hero> vsHeroes) {
-        String heroName = Hero.findById(advantage.getHeroId()).getName();
-
-        Vs matchup = null;
-        for (Hero hero: vsHeroes) {
-            if (matchup == null) {
-                matchup = advantage.getVs().stream()
-                        .filter(vs -> hero.getId() == vs.getHeroId2())
-                        .findFirst()
-                        .orElseGet(Vs::new);
-            } else {
-                Optional<Vs> newMatchup = advantage.getVs().stream()
-                        .filter(vs -> hero.getId() == vs.getHeroId2())
-                        .findFirst();
-
-                if (newMatchup.isPresent()) {
-                    double newSynergy = newMatchup.get().getSynergy();
-                    double synergy = matchup.getSynergy();
-                    double updatedSynergy = synergy + newSynergy;
-                    matchup.setSynergy(updatedSynergy);
-
-                    if (newMatchup.get().getMatchCount() < matchup.getMatchCount()) {
-                        matchup.setMatchCount(newMatchup.get().getMatchCount());
-                    }
-                }
-            }
-        }
-
-        assert matchup != null;
-        return new CounterData(heroName, matchup.getSynergy(), matchup.getMatchCount());
     }
 
     private CounterData mapToCounterData(Advantage advantage, List<Hero> vsHeroes, List<Hero> withHeroes) {
