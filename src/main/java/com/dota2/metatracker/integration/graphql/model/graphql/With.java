@@ -1,6 +1,6 @@
-package com.dota2.metatracker.model.graphql;
+package com.dota2.metatracker.integration.graphql.model.graphql;
 
-public class Vs {
+public class With {
 
     private short heroId2;
     private double synergy;
@@ -29,4 +29,5 @@ public class Vs {
     public void setMatchCount(long matchCount) {
         this.matchCount = matchCount;
     }
+
 }

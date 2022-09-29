@@ -1,4 +1,4 @@
-package com.dota2.metatracker.model;
+package com.dota2.metatracker.integration.graphql.model.graphql;
 
 public class GraphqlRequestBody {
 

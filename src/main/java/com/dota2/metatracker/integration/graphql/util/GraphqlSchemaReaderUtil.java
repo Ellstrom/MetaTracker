@@ -1,4 +1,4 @@
-package com.dota2.metatracker.util;
+package com.dota2.metatracker.integration.graphql.util;
 
 import java.io.IOException;
 import java.util.Objects;

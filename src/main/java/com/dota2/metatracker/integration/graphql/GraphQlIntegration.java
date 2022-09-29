@@ -1,60 +1,45 @@
-package com.dota2.metatracker.service;
+package com.dota2.metatracker.integration.graphql;
 
 import com.dota2.metatracker.configuration.MetaTrackerConfigProperties;
-import com.dota2.metatracker.model.GraphqlRequestBody;
-import com.dota2.metatracker.model.graphql.Data;
-import com.dota2.metatracker.model.graphql.HeroStats;
-import com.dota2.metatracker.model.graphql.HeroStatsDto;
-import com.dota2.metatracker.model.graphql.HeroVsHeroMatchup;
-import com.dota2.metatracker.util.GraphqlSchemaReaderUtil;
+import com.dota2.metatracker.integration.graphql.model.graphql.GraphqlRequestBody;
+import com.dota2.metatracker.integration.graphql.model.graphql.Data;
+import com.dota2.metatracker.integration.graphql.model.graphql.HeroStats;
+import com.dota2.metatracker.integration.graphql.model.graphql.HeroStatsDto;
+import com.dota2.metatracker.integration.graphql.model.graphql.HeroVsHeroMatchup;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
-@Service
-public class GraphQlClient {
+@Component
+public class GraphQlIntegration {
 
     private final String url;
-    private static final int NUMBER_OF_RESULTS = 100000;
     private final MetaTrackerConfigProperties config;
     private final WebClient webClient;
+    private final GraphQlMapper graphQlMapper;
 
-    public GraphQlClient(@Value("https://api.stratz.com/graphql") String url, MetaTrackerConfigProperties config, WebClient webClient) {
+    public GraphQlIntegration(@Value("https://api.stratz.com/graphql") String url, MetaTrackerConfigProperties config, WebClient webClient, GraphQlMapper graphQlMapper) {
         this.url = url;
         this.config = config;
         this.webClient = webClient;
+        this.graphQlMapper = graphQlMapper;
     }
+
 
     public HeroStatsDto getHeroStats(int minimumAmountOfGamesForMatchup) throws IOException {
-
-        HeroStatsDto heroStats1 = performRequest(generateGraphqlRequestBody("1", minimumAmountOfGamesForMatchup));
-        HeroStatsDto heroStats2 = performRequest(generateGraphqlRequestBody("2", minimumAmountOfGamesForMatchup));
-        HeroStatsDto heroStats3 = performRequest(generateGraphqlRequestBody("3", minimumAmountOfGamesForMatchup));
-        HeroStatsDto heroStats4 = performRequest(generateGraphqlRequestBody("4", minimumAmountOfGamesForMatchup));
-        HeroStatsDto heroStats5 = performRequest(generateGraphqlRequestBody("5", minimumAmountOfGamesForMatchup));
-        HeroStatsDto heroStats6 = performRequest(generateGraphqlRequestBody("6", minimumAmountOfGamesForMatchup));
+        HeroStatsDto heroStats1 = performRequest(graphQlMapper.mapToGraphQlRequestBody("1", minimumAmountOfGamesForMatchup));
+        HeroStatsDto heroStats2 = performRequest(graphQlMapper.mapToGraphQlRequestBody("2", minimumAmountOfGamesForMatchup));
+        HeroStatsDto heroStats3 = performRequest(graphQlMapper.mapToGraphQlRequestBody("3", minimumAmountOfGamesForMatchup));
+        HeroStatsDto heroStats4 = performRequest(graphQlMapper.mapToGraphQlRequestBody("4", minimumAmountOfGamesForMatchup));
+        HeroStatsDto heroStats5 = performRequest(graphQlMapper.mapToGraphQlRequestBody("5", minimumAmountOfGamesForMatchup));
+        HeroStatsDto heroStats6 = performRequest(graphQlMapper.mapToGraphQlRequestBody("6", minimumAmountOfGamesForMatchup));
 
         return mergeHeroStats(heroStats1, heroStats2, heroStats3, heroStats4, heroStats5, heroStats6);
-    }
-
-    private GraphqlRequestBody generateGraphqlRequestBody(String fileSuffix, int minimumAmountOfGamesForMatchup) throws IOException {
-        GraphqlRequestBody graphqlRequestBody = new GraphqlRequestBody();
-
-        final String query = GraphqlSchemaReaderUtil.getSchemaFromFileName("getHeroStats" + fileSuffix);
-
-        graphqlRequestBody.setQuery(query);
-
-        graphqlRequestBody.setVariables(Map.of(
-                "take", NUMBER_OF_RESULTS,
-                "matchLimit", minimumAmountOfGamesForMatchup));
-
-        return graphqlRequestBody;
     }
 
     private HeroStatsDto performRequest(GraphqlRequestBody graphqlRequestBody) {
