@@ -1,5 +1,6 @@
 package com.dota2.metatracker.integration.graphql;
 
+import com.dota2.metatracker.cache.CachingConfig;
 import com.dota2.metatracker.configuration.MetaTrackerConfigProperties;
 import com.dota2.metatracker.integration.graphql.model.graphql.GraphqlRequestBody;
 import com.dota2.metatracker.integration.graphql.model.graphql.Data;
@@ -7,6 +8,9 @@ import com.dota2.metatracker.integration.graphql.model.graphql.HeroStats;
 import com.dota2.metatracker.integration.graphql.model.graphql.HeroStatsDto;
 import com.dota2.metatracker.integration.graphql.model.graphql.HeroVsHeroMatchup;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -23,14 +27,17 @@ public class GraphQlIntegration {
     private final WebClient webClient;
     private final GraphQlMapper graphQlMapper;
 
-    public GraphQlIntegration(@Value("https://api.stratz.com/graphql") String url, MetaTrackerConfigProperties config, WebClient webClient, GraphQlMapper graphQlMapper) {
+    private final CachingConfig cacheConfig;
+
+    public GraphQlIntegration(@Value("https://api.stratz.com/graphql") String url, MetaTrackerConfigProperties config, WebClient webClient, GraphQlMapper graphQlMapper, CachingConfig cacheConfig) {
         this.url = url;
         this.config = config;
         this.webClient = webClient;
         this.graphQlMapper = graphQlMapper;
+        this.cacheConfig = cacheConfig;
     }
 
-
+    @Cacheable("stratzdata")
     public HeroStatsDto getHeroStats(int minimumAmountOfGamesForMatchup) throws IOException {
         HeroStatsDto heroStats1 = performRequest(graphQlMapper.mapToGraphQlRequestBody("1", minimumAmountOfGamesForMatchup));
         HeroStatsDto heroStats2 = performRequest(graphQlMapper.mapToGraphQlRequestBody("2", minimumAmountOfGamesForMatchup));
@@ -40,6 +47,11 @@ public class GraphQlIntegration {
         HeroStatsDto heroStats6 = performRequest(graphQlMapper.mapToGraphQlRequestBody("6", minimumAmountOfGamesForMatchup));
 
         return mergeHeroStats(heroStats1, heroStats2, heroStats3, heroStats4, heroStats5, heroStats6);
+    }
+
+    @Scheduled(cron = "0 0 0 * * *") //Midnight
+    public void clearCache() {
+        cacheConfig.getCacheManager().getCache("stratzdata").clear();
     }
 
     private HeroStatsDto performRequest(GraphqlRequestBody graphqlRequestBody) {
