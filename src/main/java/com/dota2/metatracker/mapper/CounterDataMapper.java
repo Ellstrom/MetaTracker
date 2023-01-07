@@ -5,6 +5,7 @@ import com.dota2.metatracker.model.Hero;
 import com.dota2.metatracker.integration.graphql.model.graphql.Advantage;
 import com.dota2.metatracker.integration.graphql.model.graphql.Vs;
 import com.dota2.metatracker.integration.graphql.model.graphql.With;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -58,6 +59,10 @@ public class CounterDataMapper {
     private Vs populateVsMatchup(Advantage advantage, List<Hero> vsHeroes) {
         Vs vsMatchup = null;
         for (Hero hero: vsHeroes) {
+            if(hero == Hero.DROW_RANGER) {
+                int a = 123;
+            }
+
             if (vsMatchup == null) {
                 vsMatchup = advantage.getVs().stream()
                         .filter(vs -> hero.getId() == vs.getHeroId2())

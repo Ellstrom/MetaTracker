@@ -3,6 +3,7 @@ package com.dota2.metatracker;
 import com.dota2.metatracker.model.CounterData;
 import com.dota2.metatracker.model.Hero;
 import com.dota2.metatracker.service.MetaDataService;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,6 +27,11 @@ public class MetaTrackerController {
                                                              @RequestParam(defaultValue = "0") int minimumAmountOfGamesForMatchup) throws IOException {
 
         return metaDataService.getCounterData(vsHeroes, withHeroes, heroesToInclude, minimumAmountOfGamesForMatchup);
+    }
+
+    @DeleteMapping(value = "/matchups/cache")
+    public void clearMatchupCache() {
+        metaDataService.clearCache();
     }
 
 }
